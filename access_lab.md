@@ -8,13 +8,13 @@ On macOS, or Linux use the terminal to connect to the lab machine.
 
 ### Set permission on SSH key 
 ```
-chmod 600 int-docker-kube-main/keys/lab.pem
+chmod 600 ms-labs-main/keys/lab.pem
 ```
 
 ### SSH to lab servers 
 The username for SSH is `ubuntu`
 ```
-ssh -i int-docker-kube-main/keys/lab.pem ubuntu@<LAB IP> 
+ssh -i ms-labs-main/keys/lab.pem ubuntu@<LAB IP> 
 ```
 
 
