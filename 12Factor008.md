@@ -160,7 +160,6 @@ The objective of this lesson is to explain the concept of process types and how 
 
 A process type is an grouping of application processes according to semantic definition. For example, in the demonstration application *Food Court* there are three process types, `consumer`, `provider` and `persistence`. (The names we assign to the process type group are arbitrary.)
 
-![Food Court](12factor-008/assets/process-types.jpg)
 
 The `customer` service is a process type, `consumer` because it consumes data from the `provider` type.
 

@@ -184,7 +184,6 @@ The assumption is that all restaurants will be running on the same port. This is
 
 Let's get out of `vi` and take a look at some code for a restaurant.
 
-![portbinding](12factor-007/assets/portbinding.jpg)
 
 **Step 4:** Get out of `vi` line numbered view mode
 
