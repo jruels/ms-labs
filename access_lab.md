@@ -22,11 +22,11 @@ ssh -i int-docker-kube-main/keys/lab.pem ubuntu@<LAB IP>
 On Windows use Putty to access the lab machine.   
 Open Putty and configure a new session. 
   
-![](index/C4EC1E64-175D-4C84-8C49-D938337FA35A.png)
+![](assets/C4EC1E64-175D-4C84-8C49-D938337FA35A.png)
 
 Expand “Connection_SSH_Auth and then specify the PPK file from the `keys` directory 
-![](index/6FFB137C-1AD8-48A1-97E6-F5F6DA4BC55B.png)
+![](assets/6FFB137C-1AD8-48A1-97E6-F5F6DA4BC55B.png)
 
  Now save your session    
 
-![](index/FD3BA694-FD69-4C86-8EAF-4D5FC813EABA.png)
+![](assets/FD3BA694-FD69-4C86-8EAF-4D5FC813EABA.png)
