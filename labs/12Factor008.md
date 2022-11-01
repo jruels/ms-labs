@@ -26,11 +26,7 @@ The steps you'll take in this scenario are as follows:
 ## About the demonstration application
 The demonstration application used in the scenario is a version of the *Food Court* project we've worked with previously. However, in this lab , *Food Court* has been refactored to run under a Kubernetes Cluster.
 
-![Food Court](12factor-008/assets/foodcourt.jpg)
-
 Each component is represented as a [Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/). Each service is backed by a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) of pods. You're going to affect concurrency by adjusting the `replicas` attribute in the manifest `yaml` file for some of the deployments.
-
-**Caution** Since this lab will be running in a different kubernetes environment than it was configured for, some of the pod restarts will fail with Docker container errors, but you should be able to still see the point of the lab.
 
 ---
 ## Part 1: Cloning the Lesson Code from GitHub
@@ -81,7 +77,7 @@ minikube   Ready    master   54s   v1.17.0
 
 ---
 
-## Part 2: Getting the Code Up and Running in a Kubernetes
+## Part 2: Getting the Code Up and Running in Kubernetes
 
 ## Objective
 The objective of this lesson is demonstrate how to get the demonstration code up and running
@@ -90,7 +86,7 @@ The objective of this lesson is demonstrate how to get the demonstration code up
 
 **Step 1:** Navigate back to the the lesson's working directory.
 
-`cd /home/ubuntu/lab08/12factor && pwd`{{execute T1}}
+`cd /home/ubuntu/lab08/12factor && pwd`
 
 You should see the following output:
 
@@ -109,28 +105,11 @@ Switched to a new branch '8-concurrency.0.0.1'
 
 ```
 
-Create the container images the scenario needs and store them in the Local Container Repository running on `localhost:5000`.
-
-**Step 3:** Execute the bash script that executes the provisioning
-
-`sh docker-seed.sh`
-
-**Step 4:** Confirm that the expected the docker images in the Local Container Registry
-
-`curl http://localhost:5000/v2/_catalog`
-
-You should see the following as output:
-
-```
-{"repositories":["burgerqueen","collector","customer","hobos","iowafried"]}
-
-```
-
-**Step 5**  Seed Kubernetes
+**Step 3**  Seed Kubernetes
 
 `cd k8s && sh generate-k8s-resources.sh`
 
-**Step 6** Confirm all the deployments and services are running
+**Step 4** Confirm all the deployments and services are running
 
 `kubectl get deployment`
 
@@ -165,41 +144,9 @@ redis-deployment         1/1     1            1           2m
 
 ```
 
-However, there may be a 0/1 for the READY column because of a configuration problem. The error can be seen in the creation of the Docker containers
-
 `kubectl get pods`  
 
-Check the service
 
-`kubectl get service`{{execute T1}}
-
-You get output similar to the following:
-
-```
-NAME          TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)        AGE
-burgerqueen   ClusterIP      10.99.38.60      <none>         80/TCP         5s
-collector     ClusterIP      10.98.97.42      <none>         80/TCP         5s
-customer      LoadBalancer   10.98.104.91     10.98.104.91   80:32122/TCP   4s
-hobos         ClusterIP      10.102.225.246   <none>         80/TCP         4s
-iowafried     ClusterIP      10.105.87.146    <none>         80/TCP         4s
-kubernetes    ClusterIP      10.96.0.1        <none>         443/TCP        7m14s
-redis         ClusterIP      10.98.138.176    <none>         80/TCP         3s
-
-```
-
-Take notice of the `EXTERNAL-IP` of the service `customer`. This is the entry point service into *Food Court* within the Kubernetes cluster. In this case the `EXTERNAL-IP` is `10.98.104.91`.
-
-**Step 6** If the service is running at an external IP, confirm that Food Court is running in the Kubernetes cluster by making executing `curl` against `customer`. (Notice that `customer` is running on port `80`. Thus, when we call `curl` we can execute using the service name only and expect that the default HTTP, `80`, port of will be used.
-
-`curl 10.98.104.91`
-
-You get output similar to the following (The restaurant will differ.):
-
-```
-
-{"restaurant":"Iowa Fried Chicken","order":"20 Piece Bucket"},"customer":"Friendly Shopper"}
-
-```
 
 ---
 
